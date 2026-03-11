@@ -11,45 +11,45 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteServicio = exports.updateServicio = exports.createServicio = exports.getServicioById = exports.getAllServicios = void 0;
 const servicio_1 = require("../models/servicio");
-// Obtener todos los servicios
+// trae todos los servicios
 const getAllServicios = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const servicios = yield servicio_1.Servicio.findAll();
         return res.status(200).json({
             status: "success",
-            message: "Servicios obtenidos correctamente",
+            message: "ok",
             payload: servicios
         });
     }
     catch (error) {
         return res.status(500).json({
             status: "error",
-            message: "Error al obtener los servicios",
+            message: "algo salio mal obteniendo los servicios",
             error
         });
     }
 });
 exports.getAllServicios = getAllServicios;
-// Obtener un servicio por id
+// busca por id
 const getServicioById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const servicio = yield servicio_1.Servicio.findByPk(Number(req.params.id));
         return res.status(200).json({
             status: "success",
-            message: "Servicio obtenido correctamente",
+            message: "ok",
             payload: servicio
         });
     }
     catch (error) {
         return res.status(500).json({
             status: "error",
-            message: "Error al obtener el servicio",
+            message: "no se encontro el servicio",
             error
         });
     }
 });
 exports.getServicioById = getServicioById;
-// Crear un nuevo servicio
+// Crea nuevo servicio
 const createServicio = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     if (!req.body) {
         return res.status(400).json({
@@ -62,20 +62,20 @@ const createServicio = (req, res) => __awaiter(void 0, void 0, void 0, function*
         const servicio = yield servicio_1.Servicio.create(Object.assign({}, req.body));
         return res.status(200).json({
             status: "success",
-            message: "Servicio creado correctamente",
+            message: "creado",
             payload: servicio
         });
     }
     catch (error) {
         return res.status(500).json({
             status: "error",
-            message: "Error al crear el servicio",
+            message: "algo salio mal creando el servicio",
             error
         });
     }
 });
 exports.createServicio = createServicio;
-// Actualizar un servicio
+// actualiza los datos
 const updateServicio = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     if (!req.body) {
         return res.status(400).json({
@@ -88,33 +88,33 @@ const updateServicio = (req, res) => __awaiter(void 0, void 0, void 0, function*
         const actualizado = yield servicio_1.Servicio.update(Object.assign({}, req.body), { where: { id_servicio: req.params.id } });
         return res.status(200).json({
             status: "success",
-            message: "Servicio actualizado correctamente",
+            message: "actualizado",
             payload: actualizado
         });
     }
     catch (error) {
         return res.status(500).json({
             status: "error",
-            message: "Error al actualizar el servicio",
+            message: "algo salio mal actualizando",
             error
         });
     }
 });
 exports.updateServicio = updateServicio;
-// Eliminar un servicio
+// borrar un servicio
 const deleteServicio = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.body;
     try {
         yield servicio_1.Servicio.destroy({ where: { id_servicio: id } });
         return res.status(200).json({
             status: "success",
-            message: "Servicio eliminado correctamente"
+            message: "eliminado"
         });
     }
     catch (error) {
         return res.status(500).json({
             status: "error",
-            message: "Error al eliminar el servicio",
+            message: "algo salio mal eliminando",
             error
         });
     }

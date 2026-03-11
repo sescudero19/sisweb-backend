@@ -1,43 +1,43 @@
 import { RequestHandler, Request, Response } from "express";
 import { Servicio } from "../models/servicio";
 
-// Obtener todos los servicios
+// trae todos los servicios
 export const getAllServicios: RequestHandler = async (req: Request, res: Response) => {
     try {
         const servicios: Array<Servicio> = await Servicio.findAll();
         return res.status(200).json({
             status: "success",
-            message: "Servicios obtenidos correctamente",
+            message: "ok",
             payload: servicios
         });
     } catch (error) {
         return res.status(500).json({
             status: "error",
-            message: "Error al obtener los servicios",
+            message: "algo salio mal obteniendo los servicios",
             error
         });
     }
 };
 
-// Obtener un servicio por id
+// busca por id
 export const getServicioById: RequestHandler = async (req: Request, res: Response) => {
     try {
         const servicio = await Servicio.findByPk(Number(req.params.id));
         return res.status(200).json({
             status: "success",
-            message: "Servicio obtenido correctamente",
+            message: "ok",
             payload: servicio
         });
     } catch (error) {
         return res.status(500).json({
             status: "error",
-            message: "Error al obtener el servicio",
+            message: "no se encontro el servicio",
             error
         });
     }
 };
 
-// Crear un nuevo servicio
+// Crea nuevo servicio
 export const createServicio: RequestHandler = async (req: Request, res: Response) => {
     if (!req.body) {
         return res.status(400).json({
@@ -50,19 +50,19 @@ export const createServicio: RequestHandler = async (req: Request, res: Response
         const servicio = await Servicio.create({ ...req.body });
         return res.status(200).json({
             status: "success",
-            message: "Servicio creado correctamente",
+            message: "creado",
             payload: servicio
         });
     } catch (error) {
         return res.status(500).json({
             status: "error",
-            message: "Error al crear el servicio",
+            message: "algo salio mal creando el servicio",
             error
         });
     }
 };
 
-// Actualizar un servicio
+// actualiza los datos
 export const updateServicio: RequestHandler = async (req: Request, res: Response) => {
     if (!req.body) {
         return res.status(400).json({
@@ -75,31 +75,31 @@ export const updateServicio: RequestHandler = async (req: Request, res: Response
         const actualizado = await Servicio.update({ ...req.body }, { where: { id_servicio: req.params.id } });
         return res.status(200).json({
             status: "success",
-            message: "Servicio actualizado correctamente",
+            message: "actualizado",
             payload: actualizado
         });
     } catch (error) {
         return res.status(500).json({
             status: "error",
-            message: "Error al actualizar el servicio",
+            message: "algo salio mal actualizando",
             error
         });
     }
 };
 
-// Eliminar un servicio
+// borrar un servicio
 export const deleteServicio: RequestHandler = async (req: Request, res: Response) => {
     const { id } = req.body;
     try {
         await Servicio.destroy({ where: { id_servicio: id } });
         return res.status(200).json({
             status: "success",
-            message: "Servicio eliminado correctamente"
+            message: "eliminado"
         });
     } catch (error) {
         return res.status(500).json({
             status: "error",
-            message: "Error al eliminar el servicio",
+            message: "algo salio mal eliminando",
             error
         });
     }

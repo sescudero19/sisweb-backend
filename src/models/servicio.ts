@@ -1,4 +1,3 @@
-// Modelo de Servicio para la base de datos
 import { Table, Model, Column, DataType, CreatedAt, UpdatedAt } from 'sequelize-typescript';
 import { Optional } from 'sequelize';
 
